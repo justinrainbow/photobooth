@@ -1,0 +1,4 @@
+/tools/raw/*
+/tools/toprint/*
+/tools/processed/*
+.DS_Store
