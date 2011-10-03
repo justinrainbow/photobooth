@@ -47,9 +47,13 @@ class ProcessPhotosCommand extends Command
         $rawImageDir     = $input->getArgument('source');
         $destination     = $input->getOption('output');
         
+        $dpi = 300;
+        $width = 4;
+        $height = 6;
+        
         $dimensions = array(
-            'width' => 288, // 4 inches * 72 dpi = 288px
-            'height'=> 432, // 6 inches * 72 dpi = 432px
+            'width' => $dpi * $width, // 4 inches * 72 dpi = 288px
+            'height'=> $dpi * $height, // 6 inches * 72 dpi = 432px
         );
         
         $rawImages = $this->findImages($rawImageDir, $input->getOption('limit'));

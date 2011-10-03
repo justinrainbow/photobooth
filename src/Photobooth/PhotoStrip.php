@@ -55,7 +55,7 @@ class PhotoStrip
         $x = 0;
         $y = 0;
         
-        $width = $this->getWidth();
+        $width = $this->getWidth() / 2;
         $height = $this->getHeight() / count($this->images);
         
         foreach ($this->images AS $image) {
@@ -72,7 +72,7 @@ class PhotoStrip
     protected function prepareImage(Imagick $image, $width, $height)
     {
         $image->setGravity(Imagick::GRAVITY_CENTER);
-        $image->resizeImage(144, null, Imagick::FILTER_LANCZOS, 1, false);
+        $image->resizeImage($width, null, Imagick::FILTER_LANCZOS, 1, false);
         
         if ($image->getImageHeight() > $height) {
             $y = ($image->getImageHeight() - $height) / 2;
