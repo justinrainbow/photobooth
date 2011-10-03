@@ -1,0 +1,26 @@
+#!/usr/bin/env php
+<?php
+
+require_once __DIR__.'/autoload.php';
+
+use Symfony\Component\Console\Application;
+use Symfony\Component\Finder\Finder;
+
+$application = new Application('photobooth', '0.1.0');
+$commands = Finder::create()->files()
+    ->name('*Command.php')
+    ->in(__DIR__.'/src/Photobooth');
+
+foreach ($commands AS $command) {
+    $className = strtr(
+        'Photobooth/' . $command->getRelativePathname(),
+        array('/' => '\\', '.php' => '')
+    );
+
+    $reflection = new \ReflectionClass($className);
+    
+    if (!$reflection->isAbstract()) {
+        $application->add(new $className);
+    }
+}
+$application->run();
