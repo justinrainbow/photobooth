@@ -52,8 +52,8 @@ class ProcessPhotosCommand extends Command
         $height = 6;
         
         $dimensions = array(
-            'width' => $dpi * $width, // 4 inches * 72 dpi = 288px
-            'height'=> $dpi * $height, // 6 inches * 72 dpi = 432px
+            'width'  => $dpi * $width,  // 4 inches * 72 dpi = 288px
+            'height' => $dpi * $height, // 6 inches * 72 dpi = 432px
         );
         
         $rawImages = $this->findImages($rawImageDir, $input->getOption('limit'));
@@ -64,10 +64,11 @@ class ProcessPhotosCommand extends Command
         }
         
         $photoStrip = new PhotoStrip($dimensions['width'], $dimensions['height']);
+        $photoStrip->setBackgroundColor(new \ImagickPixel('white'));
 
-        $images = new \Imagick($rawImages);
-
-        foreach ($images AS $image) {
+        foreach ($rawImages AS $file) {
+            $image = new \Imagick($file);
+            
             $image->rotateImage(new \ImagickPixel(), -90);
 
             $photoStrip->addImage($image);

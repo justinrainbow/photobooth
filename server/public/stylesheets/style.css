@@ -1,0 +1,43 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  text-align: center;
+  margin: 0 auto;
+}
+a {
+  color: #00B7FF;
+}
+.button {
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #e80000), color-stop(100%, #9c0000));
+  background: -moz-linear-gradient(center top, #e80000 0%, #9c0000 100%);
+  -webkit-box-shadow: 0px 10px 0px 0px #800000, 0px -1px 0px 0px #ad4b4b inset, 0px 10px 15px 5px #adadad;
+  -moz-box-shadow: 0px 10px 0px 0px #800000, 0px -1px 0px 0px #ad4b4b inset, 0px 10px 15px 5px #adadad;
+  box-shadow: 0px 10px 0px 0px #800000, 0px -1px 0px 0px #ad4b4b inset, 0px 10px 15px 5px #adadad;
+  -webkit-border-radius: 75px;
+  -moz-border-radius: 75px;
+  border-radius: 75px;
+  -webkit-transition: all 0.1s linear;
+  -moz-transition: all 0.1s linear;
+  -o-transition: all 0.1s linear;
+  transition: all 0.1s linear;
+  text-shadow: 1px 1px 0px #242424;
+  text-align: center;
+  font-family: SF;
+  font-size: 40px;
+  line-height: 150px;
+  color: #ffffff;
+  min-width: 150px;
+  padding: 0 1em;
+}
+.button:hover {
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ff0000), color-stop(100%, #9c0000));
+  background: -moz-linear-gradient(center top, #ff0000 0%, #9c0000 100%);
+}
+.button:active {
+  -webkit-box-shadow: 0px 2px 0px 0px #6e006e;
+  -moz-box-shadow: 0px 2px 0px 0px #6e006e;
+  box-shadow: 0px 2px 0px 0px #6e006e;
+  -webkit-transform: translatey(8px);
+  -moz-transform: translatey(8px);
+  transform: translatey(8px);
+}
