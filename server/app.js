@@ -44,7 +44,7 @@ app.get('/snap', function (req, res) {
             photobooth = false;
         });
         photobooth.stdout.on('data', function (data) {
-          console.log(data);
+          console.log(data.toString());
         });
     }
     
