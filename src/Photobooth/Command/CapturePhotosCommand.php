@@ -2,7 +2,6 @@
 
 namespace Photobooth\Command;
 
-use Symfony\Component\Console\Command\Command;
 
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputOption;
@@ -14,7 +13,7 @@ use Symfony\Component\Process\Process;
 use Symfony\Component\Process\ExecutableFinder;
 use PhotoBooth\Process\CaptureCommand;
 
-class CapturePhotosCommand extends Command
+class CapturePhotosCommand extends BaseCommand
 {
     public function configure()
     {

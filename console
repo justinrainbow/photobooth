@@ -3,17 +3,18 @@
 
 require_once __DIR__.'/autoload.php';
 
-use Symfony\Component\Console\Application;
+use Photobooth\Application;
 use Symfony\Component\Finder\Finder;
 
 $application = new Application('photobooth', '0.1.0');
+$application->setRootDir(__DIR__);
 $commands = Finder::create()->files()
     ->name('*Command.php')
-    ->in(__DIR__.'/src/Photobooth');
+    ->in(__DIR__.'/src/Photobooth/Command');
 
 foreach ($commands AS $command) {
     $className = strtr(
-        'Photobooth/' . $command->getRelativePathname(),
+        'Photobooth/Command/' . $command->getRelativePathname(),
         array('/' => '\\', '.php' => '')
     );
 

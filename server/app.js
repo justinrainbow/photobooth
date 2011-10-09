@@ -6,9 +6,9 @@
 var express = require('express'),
     fs      = require('fs'),
     spawn   = require('child_process').spawn,
-    socket  = require('socket.io');
 
-var app = module.exports = express.createServer(),
+    app = module.exports = express.createServer(),
+    io  = require('socket.io').listen(app),
     photobooth;
 
 // Configuration
@@ -30,8 +30,6 @@ app.configure('development', function(){
 app.configure('production', function(){
   app.use(express.errorHandler()); 
 });
-
-var io = socket.listen(app);
 
 // Routes
 
@@ -68,9 +66,7 @@ app.get('/config', function (req, res) {
 });
 
 app.post('/config', function (req, res) {
-    fs.writeFile(__dirname+"/../config.json", JSON.stringify(req.body), function (err) {
-        
-    });
+    fs.writeFile(__dirname+"/../config.json", JSON.stringify(req.body));
     res.send("");
 });
 

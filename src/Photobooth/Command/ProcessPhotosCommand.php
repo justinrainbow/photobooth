@@ -2,8 +2,6 @@
 
 namespace Photobooth\Command;
 
-use Symfony\Component\Console\Command\Command;
-
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
@@ -15,7 +13,7 @@ use Symfony\Component\Process\ExecutableFinder;
 
 use Photobooth\PhotoStrip;
 
-class ProcessPhotosCommand extends Command
+class ProcessPhotosCommand extends BaseCommand
 {
     public function configure()
     {
@@ -44,6 +42,7 @@ class ProcessPhotosCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $config          = $this->getConfig();
         $rawImageDir     = $input->getArgument('source');
         $destination     = $input->getOption('output');
 
