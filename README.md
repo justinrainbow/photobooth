@@ -3,7 +3,7 @@
 
 ## Requirements
 
- * Sofortbild app for Mac http://www.sofortbildapp.com/
+ * [gphoto2](http://www.gphoto.org/)
  * PHP + Imagick (this dependency will be removed in future versions)
  * ImageMagick
 
@@ -21,3 +21,7 @@ Open up the Sofortbild.app preferences window.
 The `Save captured pictures to` needs to be set to the `tools/raw` directory.
 
 ![](https://github.com/justinrainbow/photobooth/raw/master/docs/images/sofortbild-preferences-dir.png)
+
+
+## The breakdown
+
