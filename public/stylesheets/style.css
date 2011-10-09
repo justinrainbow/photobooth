@@ -13,6 +13,7 @@ a {
 .message {
   color: #fff;
   margin-top: 20px;
+  font-size: 72px;
 }
 .button {
   display: inline-block;
@@ -21,7 +22,7 @@ a {
   -ms-border-radius: 8px;
   -o-border-radius: 8px;
   border-radius: 8px;
-  font-size: 36px;
+  font-size: 96px;
   -webkit-box-shadow: 0 8px 0 #1a74a1, 0 15px 20px rgba(0, 0, 0, 0.35);
   -moz-box-shadow: 0 8px 0 #1a74a1, 0 15px 20px rgba(0, 0, 0, 0.35);
   box-shadow: 0 8px 0 #1a74a1, 0 15px 20px rgba(0, 0, 0, 0.35);
@@ -32,7 +33,7 @@ a {
 }
 .button span {
   display: inline-block;
-  padding: 0.7em 2em;
+  padding: 0.7em 1.4em;
   font-family: "cooper-black-std-1", "cooper-black-std-2", Helvetica, Arial, sans-serif;
   line-height: 1;
   text-shadow: 0 -1px 1px rgba(19, 65, 88, 0.8);
@@ -52,12 +53,12 @@ a {
   -o-transition: -o-transform 0.2s ease-in-out;
   transition: transform 0.2s ease-in-out;
 }
-.button:active {
+.button:active, .button:focus {
   -webkit-box-shadow: 0 8px 0 #1a74a1, 0 12px 10px rgba(0, 0, 0, 0.3);
   -moz-box-shadow: 0 8px 0 #1a74a1, 0 12px 10px rgba(0, 0, 0, 0.3);
   box-shadow: 0 8px 0 #1a74a1, 0 12px 10px rgba(0, 0, 0, 0.3);
 }
-.button:active span {
+.button:active span, .button:focus span {
   -webkit-transform: translate(0, 4px);
   -moz-transform: translate(0, 4px);
   -o-transform: translate(0, 4px);

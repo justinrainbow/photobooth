@@ -9,7 +9,12 @@
 (function(){
     var socket = io.connect(),
         btn    = $("#snapit"),
-        status = $("#status");
+        status = $("#status"),
+        titles = {
+            'init': 'Get ready',
+            'start': "It's on!",
+            'download': 'Smile!'
+        };
 
     socket.on('booth:capture', function (txt) {
         var data;
@@ -18,12 +23,11 @@
             data = JSON.parse(txt);
 
             if (data && data.action) {
-                status.html(data.action);
-
                 if (data.action === 'stop') {
                     btn.attr("disabled", false);
                     status.empty();
                 } else {
+                    status.html(titles[data.action]);
                     btn.attr("disabled", true);
                 }
             }
