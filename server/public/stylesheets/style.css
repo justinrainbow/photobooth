@@ -3,6 +3,8 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   text-align: center;
   margin: 0 auto;
+}
+body, html {
   background: #292929;
 }
 a {

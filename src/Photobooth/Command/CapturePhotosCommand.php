@@ -12,6 +12,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\ExecutableFinder;
+use PhotoBooth\Process\CaptureCommand;
 
 class CapturePhotosCommand extends Command
 {
@@ -28,17 +29,10 @@ class CapturePhotosCommand extends Command
     {
         $this->killPTPProcesses();
 
-        $finder = new ExecutableFinder();
+        $cmd = new CaptureCommand();
+        $cmd->setHookScript($input->getArgument('hook'));
 
-        $gphoto2 = $finder->find('gphoto2');
-
-        $cmd = sprintf(
-            '%s --capture-image-and-download --interval 1 --frames 3 --hook-script %s', 
-            $gphoto2,
-            $input->getArgument('hook')
-        );
-
-        $process = new Process($cmd, $input->getArgument('output'));
+        $process = new Process($cmd->getCommand(), $input->getArgument('output'));
         $process->run();
 
         if ($process->isSuccessful()) {
