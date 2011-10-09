@@ -2,3 +2,4 @@
 /tools/toprint/*
 /tools/processed/*
 .DS_Store
+/files/*

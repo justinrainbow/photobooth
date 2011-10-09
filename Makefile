@@ -1,4 +1,4 @@
 
 
 all:
-	mkdir -p tools/{raw,processed,toprint}
+	mkdir -p files/strips files/photos

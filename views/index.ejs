@@ -1,30 +1,52 @@
 <button id="snapit" class="button">
     <span>Just Take It</span>
 </button>
+<div id="status" class="message"></div>
 
 
 <script src="/socket.io/socket.io.js"></script>
 <script>
-  var socket = io.connect();
-  socket.on('news', function (data) {
-    console.log(data);
-    socket.emit('my other event', { my: 'data' });
-  });
-  
-  var btn = $("#snapit");
-  btn.click(function (e) {
-      // socket.emit('cmd', { run:true });
-      btn.attr("disabled", true);
-      
-      $.ajax({
-          url: "/snap",
-          dataType: "json",
-          success: function (data) {
-              btn.attr("disabled", false);
-          },
-          error: function (data) {
-              
-          }
-      });
-  });
+(function(){
+    var socket = io.connect(),
+        btn    = $("#snapit"),
+        status = $("#status");
+
+    socket.on('booth:capture', function (txt) {
+        var data;
+
+        try {
+            data = JSON.parse(txt);
+
+            if (data && data.action) {
+                status.html(data.action);
+
+                if (data.action === 'stop') {
+                    btn.attr("disabled", false);
+                    status.empty();
+                } else {
+                    btn.attr("disabled", true);
+                }
+            }
+        } catch (e) {
+            status.empty();
+        }
+    });
+
+    btn.click(function (e) {
+        // socket.emit('cmd', { run:true });
+        btn.attr("disabled", true);
+
+        $.ajax({
+            url: "/snap",
+            dataType: "json",
+            success: function (data) {
+                btn.attr("disabled", false);
+                status.empty();
+            },
+            error: function (data) {
+                status.empty();
+            }
+        });
+    });
+})();
 </script>

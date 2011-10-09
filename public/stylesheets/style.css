@@ -10,6 +10,10 @@ body, html {
 a {
   color: #fff;
 }
+.message {
+  color: #fff;
+  margin-top: 20px;
+}
 .button {
   display: inline-block;
   -webkit-border-radius: 8px;

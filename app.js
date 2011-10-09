@@ -6,9 +6,14 @@ var express = require('express'),
     fs      = require('fs'),
     spawn   = require('child_process').spawn,
 
-    app = module.exports = express.createServer(),
-    io  = require('socket.io').listen(app),
-    db  = require('redis').createClient(),
+    app     = module.exports = express.createServer(),
+    io      = require('socket.io').listen(app),
+    db      = require('redis').createClient(),
+    pubsub  = require('redis').createClient(),
+    
+    photo_dir = __dirname+'/files/photos',
+    strip_dir = __dirname+'/files/strips',
+
     photobooth,
     cfg;
 
@@ -34,14 +39,28 @@ app.configure('production', function(){
 
 // database
 
-db.on('connected', function () {
-    db.connected = true;
+pubsub.on('connected', function () {
+    pubsub.subscribe("booth:capture");
 });
 
-db.on("message", function (channel, message) {
+pubsub.on('reconnected', function () {
+    pubsub.subscribe("booth:capture");
+})
+
+pubsub.on("message", function (channel, message) {
     console.log("Message: "+channel+" - "+message);
+
+    io.sockets.emit(channel, message);
 });
-db.subscribe("booth:capture");
+pubsub.subscribe("booth:capture");
+
+
+io.sockets.on('connection', function (socket) {
+    socket.emit('news', { hello: 'world' });
+    socket.on('my other event', function (data) {
+        console.log(data);
+    });
+});
 
 
 // Routes
@@ -53,24 +72,39 @@ app.get('/', function(req, res){
 });
 
 function takePhotos(cb) {
+    var strip_id;
+
     photobooth = spawn('./capture.php', [], {
             cwd: __dirname
         });
-    
+
     photobooth.stderr.on('data', function (data) {
         console.log("stderr: " + data.toString())
     })
-    
+
     photobooth.on('exit', function (data) {
         photobooth = false;
-        cb();
+        cb(strip_id);
     });
-    
+
     photobooth.stdout.on('data', function (data) {
         console.log("stdout: " + data.toString());
+        strip_id = data.toString();
+    });
+
+    photobooth.stdin.end();
+}
+
+function processStrip(id, cb) {
+    var strip = spawn('./console', ['photos:process', '-o', strip_dir+'/'+id+'.jpg', photo_dir+'/'+id], {
+        cwd: __dirname
     });
     
-    photobooth.stdin.end();
+    strip.on('exit', function (data) {
+        cb(id);
+    });
+    
+    strip.stdin.end();
 }
 
 app.get('/snap', function (req, res) {
@@ -81,13 +115,23 @@ app.get('/snap', function (req, res) {
                 .expire('photolock', 60) // only lock the process for 60 seconds
                 .exec();
 
-            takePhotos(function () {
+            takePhotos(function (id) {
                 db.del('photolock');
+                
+                if (null !== id) {
+                    processStrip(id, function () {
+                        spawn('./print.php', [id], {
+                            cwd: __dirname
+                        })
+                    })
+                }
             });
 
             res.json({ type: "success" });
         } else {
-            res.json({ type: "failure", msg: "Already running" });
+            db.ttl('photolock', function (err, ttl) {
+                res.json({ type: "failure", msg: "Already running", ttl: ttl });
+            });
         }
     });
 });
@@ -108,13 +152,6 @@ app.post('/config', function (req, res) {
     fs.writeFile(__dirname+"/config.json", JSON.stringify(req.body));
 
     res.json({ msg: "Saved" });
-});
-
-io.sockets.on('connection', function (socket) {
-    socket.emit('news', { hello: 'world' });
-    socket.on('my other event', function (data) {
-        console.log(data);
-    });
 });
 
 function findPrinters(cb) {
