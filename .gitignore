@@ -3,3 +3,4 @@
 /tools/processed/*
 .DS_Store
 /files/*
+/node_modules/*
