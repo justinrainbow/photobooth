@@ -67,7 +67,7 @@ app.get('/config', function (req, res) {
 
 app.post('/config', function (req, res) {
     fs.writeFile(__dirname+"/../config.json", JSON.stringify(req.body));
-    res.send("");
+    res.json({ msg: "Saved" }, { 'Content-Type': 'application/json' });
 });
 
 io.sockets.on('connection', function (socket) {

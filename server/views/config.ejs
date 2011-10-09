@@ -1,46 +1,78 @@
 
-<div class="modal">
+<div class="modal" style="position:relative; top:0; margin-top:0;">
     <form action="/config" method="post" style="margin:0">
         <div class="modal-header">
             <h3>PhotoBooth Configuration</h3>
         </div>
 
         <div class="modal-body">
-            <div class="clearfix">
-                <label for="waittime">Wait time</label>
-                <div class="input">
-                    <input type="number" class="mini" name="waittime" id="waittime" value="<%= cfg.waittime ? cfg.waittime : 1 %>" required />
-                    <span class="help-block">
-                        Time between successive camera snaps (in seconds).
-                    </span>
+            <fieldset>
+                <legend>Camera</legend>
+                
+                <div class="clearfix">
+                    <label for="waittime">Wait time</label>
+                    <div class="input">
+                        <input type="number" class="mini" name="waittime" id="waittime" value="<%= cfg.waittime ? cfg.waittime : 1 %>" required />
+                        <span class="help-block">
+                            Time between successive camera snaps (in seconds).
+                        </span>
+                    </div>
                 </div>
-            </div>
 
-            <div class="clearfix">
-                <label for="frames">Total frames</label>
-                <div class="input">
-                    <input type="number" class="mini" name="frames" id="frames" value="<%= cfg.frames || 3 %>" required />
+                <div class="clearfix">
+                    <label for="frames">Total frames</label>
+                    <div class="input">
+                        <input type="number" class="mini" name="frames" id="frames" value="<%= cfg.frames || 3 %>" required />
+                    </div>
                 </div>
-            </div>
-
-            <div class="clearfix">
-                <label>Printer Name</label>
-                <div class="input" id="printers">
-                    <ul class="inputs-list">
-                    <% printers.forEach(function(printer) { %>
-                        <li>
-                            <label>
-                                <input type="radio" name="printer" value="<%= printer.name %>" <%= (cfg.printer == printer.name) ? "checked" : "" %>/>
-                                <%= printer.name %>
-                            </label>
-                        </li>
-                    <% }); %>
-                    </ul>
+            </fieldset>
+            
+            <fieldset>
+                <legend>Redis</legend>
+                
+                <div class="clearfix">
+                    <label for="redisHost">Host</label>
+                    <div class="input">
+                        <input type="text" name="redis[host]" id="redisHost" value="<%= cfg.redis && cfg.redis.host ? cfg.redis.host : 'localhost' %>">
+                    </div>
                 </div>
-            </div>
+            </fieldset>
+            
+            <fieldset>
+                <legend>Printing</legend>
+                
+                <div class="clearfix">
+                    <label>Printer Name</label>
+                    <div class="input" id="printers">
+                        <ul class="inputs-list">
+                        <% printers.forEach(function(printer) { %>
+                            <li>
+                                <label>
+                                    <input type="radio" name="printer" value="<%= printer.name %>" <%= (cfg.printer == printer.name) ? "checked" : "" %>/>
+                                    <%= printer.name %>
+                                </label>
+                            </li>
+                        <% }); %>
+                        </ul>
+                    </div>
+                </div>
+            </fieldset>
         </div>
         <div class="modal-footer">
             <button type="submit" class="btn primary">Save</button>
         </div>
     </form>
 </div>
+
+<script>
+$("form").submit(function (e) {
+    e.preventDefault();
+    
+    var form = $(this),
+        url  = form.attr("action");
+    
+    $.post(url, form.serialize(), function (data) {
+        
+    });
+});
+</script>

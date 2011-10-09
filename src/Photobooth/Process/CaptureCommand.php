@@ -11,11 +11,6 @@ class CaptureCommand
     private $frames   = 3;
     private $hook;
     
-    public function __construct()
-    {
-
-    }
-    
     public function setHookScript($script)
     {
         $this->hook = $script;
