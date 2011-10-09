@@ -10,3 +10,6 @@
 [submodule "vendor/Symfony/Component/Finder"]
 	path = vendor/Symfony/Component/Finder
 	url = https://github.com/symfony/Finder.git
+[submodule "vendor/predis"]
+	path = vendor/predis
+	url = https://github.com/nrk/predis.git

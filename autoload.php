@@ -8,6 +8,7 @@ $loader = new UniversalClassLoader();
 $loader->registerNamespaces(array(
     'Symfony'   => __DIR__.'/vendor',
     'Photobooth'=> __DIR__.'/src',
+    'Predis'    => __DIR__.'/vendor/predis/lib',
 ));
 
 $loader->register();

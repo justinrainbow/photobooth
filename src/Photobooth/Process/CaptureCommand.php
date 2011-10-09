@@ -24,13 +24,13 @@ class CaptureCommand
             $value = $this->{$var};
             
             if (!empty($value)) {
-                $options[$var] = escapeshellarg($var);
+                $options[$var] = is_numeric($value) ? $value : escapeshellarg($value);
             }
         }
         
-        if (null !== $this->hook) {
-            $options['hook-script'] = escapeshellarg($this->hook);
-        }
+        // if (null !== $this->hook) {
+        //     $options['hook-script'] = escapeshellarg($this->hook);
+        // }
         
         $args = array();
         foreach ($options AS $name => $value) {
@@ -41,7 +41,7 @@ class CaptureCommand
         $gphoto2 = $finder->find('gphoto2');
         
         $cmd = $gphoto2 . ' --capture-image-and-download ' . join(" ", $args);
-        
+        echo $cmd,"\n";
         return $cmd;
     }
 }

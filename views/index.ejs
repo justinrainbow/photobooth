@@ -1,0 +1,30 @@
+<button id="snapit" class="button">
+    <span>Just Take It</span>
+</button>
+
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  var socket = io.connect();
+  socket.on('news', function (data) {
+    console.log(data);
+    socket.emit('my other event', { my: 'data' });
+  });
+  
+  var btn = $("#snapit");
+  btn.click(function (e) {
+      // socket.emit('cmd', { run:true });
+      btn.attr("disabled", true);
+      
+      $.ajax({
+          url: "/snap",
+          dataType: "json",
+          success: function (data) {
+              btn.attr("disabled", false);
+          },
+          error: function (data) {
+              
+          }
+      });
+  });
+</script>

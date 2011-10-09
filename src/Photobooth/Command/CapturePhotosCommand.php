@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\ExecutableFinder;
-use PhotoBooth\Process\CaptureCommand;
+use Photobooth\Process\CaptureCommand;
 
 class CapturePhotosCommand extends BaseCommand
 {
