@@ -46,7 +46,7 @@ class ProcessPhotosCommand extends BaseCommand
         $rawImageDir     = $input->getArgument('source');
         $destination     = $input->getOption('output');
 
-        $dpi    = 300;
+        $dpi    = 72;
         $width  = 4;
         $height = 6;
 

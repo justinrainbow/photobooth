@@ -89,7 +89,7 @@ class PhotoStrip
     
     protected function prepareImage(Imagick $image, $width, $height)
     {
-        $image->setGravity(Imagick::GRAVITY_CENTER);
+        $image->setGravity(Imagick::GRAVITY_SOUTH);
         $image->cropThumbnailImage($width, $height);
 
         // add some contrast
