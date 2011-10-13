@@ -46,7 +46,7 @@ class ProcessPhotosCommand extends BaseCommand
         $rawImageDir     = $input->getArgument('source');
         $destination     = $input->getOption('output');
 
-        $dpi    = 72;
+        $dpi    = 300;
         $width  = 4;
         $height = 6;
 
@@ -68,7 +68,7 @@ class ProcessPhotosCommand extends BaseCommand
         foreach ($rawImages AS $file) {
             $image = new \Imagick($file);
 
-            $image->rotateImage(new \ImagickPixel(), -90);
+            // $image->rotateImage(new \ImagickPixel(), -90);
 
             $photoStrip->addImage($image);
         }
