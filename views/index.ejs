@@ -26,7 +26,12 @@
                 if (data.action === 'stop') {
                     status.empty();
                 } else {
-                    status.html(titles[data.action]);
+                    if (data.action === 'download') {
+                        var shot = parseInt(data.file.replace(/^.+?\/capt00([0-9]+)\.jpg/, "$1"), 10);
+                        status.html(titles[data.action] + " " + (shot+1));
+                    } else {
+                        status.html(titles[data.action]);
+                    }
                 }
             }
         } catch (e) {
