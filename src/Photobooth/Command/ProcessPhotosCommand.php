@@ -68,7 +68,7 @@ class ProcessPhotosCommand extends BaseCommand
         foreach ($rawImages AS $file) {
             $image = new \Imagick($file);
 
-            $image->rotateImage(new \ImagickPixel(), -90);
+            // $image->rotateImage(new \ImagickPixel(), -90);
 
             $photoStrip->addImage($image);
         }
