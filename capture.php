@@ -28,8 +28,8 @@ $strip_id = sha1(microtime(true));
 
 $env = $_ENV;
 $cmd = sprintf(
-    'STRIP_ID=%s gphoto2 --capture-image-and-download --interval %s --frames 3 --hook-script %s', 
-    $strip_id, $cfg['waittime'], escapeshellarg( __DIR__.'/hook.php')
+    'STRIP_ID=%s gphoto2 --capture-image-and-download --interval %s --frames %s --hook-script %s', 
+    $strip_id, $cfg['waittime'], $cfg['frames'], escapeshellarg( __DIR__.'/hook.php')
 );
 $dir = __DIR__.'/files/photos/' . $strip_id;
 mkdir($dir);
