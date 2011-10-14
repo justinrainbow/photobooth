@@ -24,11 +24,9 @@
 
             if (data && data.action) {
                 if (data.action === 'stop') {
-                    btn.attr("disabled", false);
                     status.empty();
                 } else {
                     status.html(titles[data.action]);
-                    btn.attr("disabled", true);
                 }
             }
         } catch (e) {
@@ -38,13 +36,10 @@
 
     btn.click(function (e) {
         // socket.emit('cmd', { run:true });
-        btn.attr("disabled", true);
-
         $.ajax({
             url: "/snap",
             dataType: "json",
             success: function (data) {
-                btn.attr("disabled", false);
                 status.empty();
             },
             error: function (data) {
