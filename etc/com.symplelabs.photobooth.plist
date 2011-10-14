@@ -9,7 +9,7 @@
     <array>
       <string>/usr/local/bin/forever</string>
       <string>start</string>
-      <string>/Users/jrainbow/Sites/symple/photobooth/app.js</string>
+      <string>/Users/justinrainbow/photobooth/app.js</string>
     </array>
     <key>RunAtLoad</key>
     <true/>
