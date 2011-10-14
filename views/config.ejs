@@ -33,13 +33,35 @@
                 <div class="clearfix">
                     <label for="redisHost">Host</label>
                     <div class="input">
-                        <input type="text" name="redis[host]" id="redisHost" value="<%= cfg.redis && cfg.redis.host ? cfg.redis.host : 'localhost' %>">
+                        <input type="text" name="redis[host]" id="redisHost" value="<%= cfg.redis && cfg.redis.host ? cfg.redis.host : 'localhost' %>" readonly />
+                    </div>
+                </div>
+                
+                <div class="clearfix">
+                    <label for="redisPort">Port</label>
+                    <div class="input">
+                        <input type="number" name="redis[port]" id="redisPort" value="<%= cfg.redis && cfg.redis.port ? cfg.redis.port : '6379' %>" readonly />
                     </div>
                 </div>
             </fieldset>
             
             <fieldset>
-                <legend>Printing</legend>
+                <legend>Photo Strip</legend>
+                
+                <div class="clearfix">
+                    <label for="dpi">DPI</label>
+                    <div class="input">
+                        <input type="number" name="dpi" id="dpi" value="<%= cfg.dpi || 300 %>" required />
+                    </div>
+                </div>
+                
+                <div class="clearfix">
+                    <label>Paper size</label>
+                    <div class="input">
+                        <input type="number" name="paper[width]" class="mini" value="<%= cfg.paper && cfg.paper.width ? cfg.paper.width : 4 %>" required /> x
+                        <input type="number" name="paper[height]" class="mini" value="<%= cfg.paper && cfg.paper.height ? cfg.paper.height : 6 %>" required />
+                    </div>
+                </div>
                 
                 <div class="clearfix">
                     <label>Printer Name</label>

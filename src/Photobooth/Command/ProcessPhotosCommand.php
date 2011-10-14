@@ -46,9 +46,9 @@ class ProcessPhotosCommand extends BaseCommand
         $rawImageDir     = $input->getArgument('source');
         $destination     = $input->getOption('output');
 
-        $dpi    = 72;
-        $width  = 4;
-        $height = 6;
+        $dpi    = isset($config['dpi']) ? $config['dpi'] : 300;
+        $width  = isset($config['paper']['width'])  ? $config['paper']['width']  : 4;
+        $height = isset($config['paper']['height']) ? $config['paper']['height'] : 6;
 
         $dimensions = array(
             'width'  => $dpi * $width,  // 4 inches * 72 dpi = 288px

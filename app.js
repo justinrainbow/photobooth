@@ -155,6 +155,12 @@ app.post('/config', function (req, res) {
     res.json({ msg: "Saved" });
 });
 
+app.get('/photos', function (req, res) {
+    fs.readdir(__dirname+"/files/strips", function (err, files) {
+        res.json(files);
+    });
+});
+
 function findPrinters(cb) {
     var printers = spawn(__dirname+"/printers.php");
     printers.on('exit', function (data) {
