@@ -55,7 +55,7 @@ class ProcessPhotosCommand extends BaseCommand
             'height' => $dpi * $height, // 6 inches * 72 dpi = 432px
         );
 
-        $rawImages = $this->findImages($rawImageDir, isset($config['frames']) ? $config['frames'] : $input->getOption('limit'));
+        $rawImages = $this->findImages($rawImageDir, isset($config['frames']) ? (int) $config['frames'] : $input->getOption('limit'));
 
         if (false === $rawImages) {
             $output->writeln('Nothing to do.');
