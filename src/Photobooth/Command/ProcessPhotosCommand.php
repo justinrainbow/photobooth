@@ -21,7 +21,7 @@ class ProcessPhotosCommand extends BaseCommand
             ->setName('photos:process')
             ->addArgument('source', InputArgument::REQUIRED, 'Directory with original photos')
             ->addOption('output', 'o', InputOption::VALUE_REQUIRED, 'Destination filename for photo strip')
-            ->addOption('limit', 'l', InputOption::VALUE_OPTIONAL, 'Number of photos to use in the strip.', 3)
+            ->addOption('limit', 'l', InputOption::VALUE_OPTIONAL, 'Number of photos to use in the strip.', 4)
         ;
     }
 
@@ -55,7 +55,7 @@ class ProcessPhotosCommand extends BaseCommand
             'height' => $dpi * $height, // 6 inches * 72 dpi = 432px
         );
 
-        $rawImages = $this->findImages($rawImageDir, $input->getOption('limit'));
+        $rawImages = $this->findImages($rawImageDir, isset($config['frames']) ? $config['frames'] : $input->getOption('limit'));
 
         if (false === $rawImages) {
             $output->writeln('Nothing to do.');
