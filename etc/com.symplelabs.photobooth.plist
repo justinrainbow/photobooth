@@ -7,11 +7,20 @@
     <string>com.symplelabs.photobooth</string>
     <key>ProgramArguments</key>
     <array>
-      <string>/usr/local/bin/forever</string>
-      <string>start</string>
-      <string>/Users/justinrainbow/photobooth/app.js</string>
+      <string>{{ bin.node }}</string>
+      <string>{{ path }}/app.js</string>
     </array>
     <key>RunAtLoad</key>
-    <true/>
+    <true />
+    <key>KeepAlive</key>
+    <true />
+    <key>UserName</key>
+    <string>{{ user }}</string>
+    <key>WorkingDirectory</key>
+    <string>{{ path }}</string>
+    <key>StandardErrorPath</key>
+    <string>{{ path }}/output.log</string>
+    <key>StandardOutPath</key>
+    <string>{{ path }}/output.log</string>
 </dict>
 </plist>
